@@ -6,9 +6,11 @@ import java.util.Set;
 
 public class UserPref {
 	private final Set<String> prefLines;
+	private final String username;
 
-	public UserPref() {
+	public UserPref(final String username) {
 		super();
+		this.username = username;
 		prefLines = new HashSet<>();
 	}
 
@@ -18,6 +20,10 @@ public class UserPref {
 
 	public void removePrefLine(final String line) {
 		prefLines.remove(line);
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 	public Set<String> getPrefLines() {

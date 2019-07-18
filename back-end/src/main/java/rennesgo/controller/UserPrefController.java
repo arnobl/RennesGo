@@ -1,38 +1,46 @@
 package rennesgo.controller;
 
-import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import java.security.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import rennesgo.data.DataPref;
 import rennesgo.data.UserPref;
 
 @RestController
-@RequestMapping("go")
+@RequestMapping("go/prefs")
 public class UserPrefController {
-	@Nullable
-	private UserPref pref;
+	@Autowired
+	private DataPref prefs;
 
-	@PutMapping("/preflines/new/{idLine}")
-	public void newPrefLine(@PathVariable final String idLine) {
-		if(pref != null) {
-			pref.addPrefLine(idLine);
-		}
+	@GetMapping("/lines/get")
+	public UserPref getPrefs(final Principal principal) {
+		return prefs.findUser(principal.getName())
+			.findFirst()
+			.orElse(null);
 	}
 
-	@DeleteMapping("/preflines/del/{idLine}")
-	public void delPrefLine(@PathVariable final String idLine) {
-		if(pref != null) {
-			pref.removePrefLine(idLine);
-		}
+	@PutMapping("/lines/new/{idLine}")
+	public UserPref newPrefLine(@PathVariable final String idLine, final Principal principal) {
+		return prefs.findUser(principal.getName())
+			.peek(pref -> pref.addPrefLine(idLine))
+			.findFirst()
+			.orElse(null);
+	}
+
+	@PutMapping("/lines/del/{idLine}")
+	public UserPref delPrefLine(@PathVariable final String idLine, final Principal principal) {
+		return prefs.findUser(principal.getName())
+			.peek(pref -> pref.removePrefLine(idLine))
+			.findFirst()
+			.orElse(null);
 	}
 
 	@GetMapping(value = "/greeting", produces = "application/json")
-	public UserPref greeting() {
-		final UserPref userPref = new UserPref();
-		userPref.addPrefLine("14");
-		return userPref;
+	public String testMethod(final Principal principal) {
+		return "yo " + principal.getName();
 	}
 }
