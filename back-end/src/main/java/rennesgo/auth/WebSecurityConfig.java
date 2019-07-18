@@ -38,13 +38,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authenticationEntryPoint(new RestAuthenticationEntryPoint())
 			.and()
 			.authorizeRequests()
-			.antMatchers("/**")
-			.authenticated()
+			.antMatchers("/go/login*").permitAll()
+			.antMatchers("/**").authenticated()
 			.and()
 			.formLogin()
+			.loginProcessingUrl("/go/login")
 			.successHandler(new MySavedRequestAwareAuthenticationSuccessHandler())
 			.failureHandler(new SimpleUrlAuthenticationFailureHandler())
 			.and()
-			.logout();
+			.logout()
+			.logoutUrl("/go/logout");
 	}
 }
