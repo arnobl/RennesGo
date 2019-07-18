@@ -7,40 +7,40 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import rennesgo.data.DataPref;
-import rennesgo.data.UserPref;
+import rennesgo.data.ProfileComponent;
+import rennesgo.data.Profile;
 
 @RestController
-@RequestMapping("go/prefs")
-public class UserPrefController {
+@RequestMapping("go/profile")
+public class ProfileController {
 	@Autowired
-	private DataPref prefs;
+	private ProfileComponent profiles;
 
-	@GetMapping("/lines/get")
-	public UserPref getPrefs(final Principal principal) {
-		return prefs.findUser(principal.getName())
+	@GetMapping("/get")
+	public Profile getProfile(final Principal principal) {
+		return profiles.findProfileOf(principal.getName())
 			.findFirst()
 			.orElse(null);
 	}
 
 	@PutMapping("/lines/new/{idLine}")
-	public UserPref newPrefLine(@PathVariable final String idLine, final Principal principal) {
-		return prefs.findUser(principal.getName())
+	public Profile newPreferredLine(@PathVariable final String idLine, final Principal principal) {
+		return profiles.findProfileOf(principal.getName())
 			.peek(pref -> pref.addPrefLine(idLine))
 			.findFirst()
 			.orElse(null);
 	}
 
 	@PutMapping("/lines/del/{idLine}")
-	public UserPref delPrefLine(@PathVariable final String idLine, final Principal principal) {
-		return prefs.findUser(principal.getName())
+	public Profile delPreferredLine(@PathVariable final String idLine, final Principal principal) {
+		return profiles.findProfileOf(principal.getName())
 			.peek(pref -> pref.removePrefLine(idLine))
 			.findFirst()
 			.orElse(null);
 	}
 
-	@GetMapping(value = "/greeting", produces = "application/json")
-	public String testMethod(final Principal principal) {
-		return "yo " + principal.getName();
+	@GetMapping("/username")
+	public String whoiam(final Principal principal) {
+		return principal.getName();
 	}
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import rennesgo.data.DataPref;
+import rennesgo.data.ProfileComponent;
 
 @RestController
 @RequestMapping("go/user")
@@ -30,7 +30,7 @@ public class UserController {
 	private UserDetailsManager userDetailsManager;
 
 	@Autowired
-	private DataPref prefs;
+	private ProfileComponent profiles;
 
 	@PostMapping("/new/{login}/{pwd}")
 	public void newAccount(@PathVariable final String login, @PathVariable final String pwd) {
@@ -41,13 +41,13 @@ public class UserController {
 		final UserDetails user = new User(login, passwordEncoder.encode(pwd),
 			Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
 		userDetailsManager.createUser(user);
-		prefs.addPref(login);
+		profiles.addProfile(login);
 	}
 
 	@DeleteMapping("/del")
 	public void delAccount(final Principal principal, final HttpServletRequest request) {
 		userDetailsManager.deleteUser(principal.getName());
-		prefs.delPref(principal.getName());
+		profiles.delProfile(principal.getName());
 		// Logging out the current user
 		SecurityContextHolder.clearContext();
 		final HttpSession session = request.getSession(false);

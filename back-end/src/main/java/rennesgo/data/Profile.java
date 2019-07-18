@@ -4,11 +4,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserPref {
+public class Profile {
+	/** The preferred bus lines of the user. */
 	private final Set<String> prefLines;
+	/** The username of the user profile. */
 	private final String username;
 
-	public UserPref(final String username) {
+	public Profile(final String username) {
 		super();
 		this.username = username;
 		prefLines = new HashSet<>();
