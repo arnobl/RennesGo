@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import rennesgo.data.Profile;
 import rennesgo.data.ProfileComponent;
 
 @RestController
@@ -33,7 +34,7 @@ public class UserController {
 	private ProfileComponent profiles;
 
 	@PostMapping("/new/{login}/{pwd}")
-	public void newAccount(@PathVariable final String login, @PathVariable final String pwd) {
+	public Profile newAccount(@PathVariable final String login, @PathVariable final String pwd) {
 		if(userDetailsManager.userExists(login)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not possible");
 		}
@@ -41,7 +42,7 @@ public class UserController {
 		final UserDetails user = new User(login, passwordEncoder.encode(pwd),
 			Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
 		userDetailsManager.createUser(user);
-		profiles.addProfile(login);
+		return profiles.addProfile(login);
 	}
 
 	@DeleteMapping("/del")

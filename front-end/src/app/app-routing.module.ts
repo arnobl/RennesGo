@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NextComponent } from './next/next.component';
+import { LinesComponent } from './lines/lines.component';
 
 const routes: Routes = [
-  { path: 'next', component: NextComponent },
+  { path: 'lines', component: LinesComponent },
   { path: '',
-    redirectTo: '/next',
+    redirectTo: '/lines',
     pathMatch: 'full'
   }
 ];
