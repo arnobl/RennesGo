@@ -3,23 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NextComponent } from './next/next.component';
+import { LinesComponent } from './lines/lines.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from './model/Network';
+import { User } from './model/User';
 import {MatGridListModule} from '@angular/material';
+import { AccountComponent } from './account/account.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NextComponent
+    LinesComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    MatGridListModule
+    MatGridListModule,
+    AngularFontAwesomeModule
   ],
-  providers: [Network],
+  providers: [Network, User],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

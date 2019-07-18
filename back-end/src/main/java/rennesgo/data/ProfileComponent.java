@@ -18,9 +18,12 @@ public class ProfileComponent {
 	/**
 	 * Creates a new preferences profile using the given user name.
 	 * @param username The user name of the profile to create.
+	 * @return The created profile.
 	 */
-	public void addProfile(final String username) {
-		profiles.add(new Profile(username));
+	public Profile addProfile(final String username) {
+		final Profile profile = new Profile(username);
+		profiles.add(profile);
+		return profile;
 	}
 
 	/**
