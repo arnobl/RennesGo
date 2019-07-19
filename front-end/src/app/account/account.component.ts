@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../model/User';
 import { HttpClient } from '@angular/common/http';
 import { Profile } from '../model/Profile';
+import { Network } from '../model/Network';
 
 @Component({
   selector: 'app-account',
@@ -13,8 +14,12 @@ export class AccountComponent {
   private pwd: string;
   private createAccount: boolean;
 
-  constructor(private readonly user: User, private http: HttpClient) {
+  constructor(private readonly user: User, private http: HttpClient, private network: Network) {
     this.createAccount = false;
+  }
+
+  private updateLineMsgs() {
+    this.user.profile.prefLines.forEach(linename => this.network.updateMessageOf(linename));
   }
 
   private loginOrCreate() {
@@ -40,7 +45,10 @@ export class AccountComponent {
   private getProfile() {
     this.http
       .get('go/profile/get', {withCredentials: true})
-      .subscribe((profile: Profile) => this.user.profile = profile);
+      .subscribe((profile: Profile) => {
+        this.user.profile = profile;
+        this.updateLineMsgs();
+      });
   }
 
   private logout() {

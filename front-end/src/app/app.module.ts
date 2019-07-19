@@ -7,7 +7,7 @@ import { LinesComponent } from './lines/lines.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Network } from './model/Network';
 import { User } from './model/User';
-import {MatGridListModule} from '@angular/material';
+import {MatGridListModule, MatIconModule, MatBadgeModule} from '@angular/material';
 import { AccountComponent } from './account/account.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -22,6 +22,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     HttpClientModule,
     AppRoutingModule,
     MatGridListModule,
+    MatIconModule,
+    MatBadgeModule,
     AngularFontAwesomeModule
   ],
   providers: [Network, User],

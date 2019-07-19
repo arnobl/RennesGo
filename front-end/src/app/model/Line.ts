@@ -6,4 +6,5 @@ export interface Line {
     couleurligne: string;
     couleurtexteligne: string;
     nomfamillecommerciale: string;
+    msgs: string[];
 }
