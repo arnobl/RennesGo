@@ -1,20 +1,23 @@
 package rennesgo.controller;
 
 import java.security.Principal;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import rennesgo.data.ProfileComponent;
 import rennesgo.data.Profile;
+import rennesgo.data.ProfileComponent;
 
 @RestController
 @RequestMapping("go/profile")
 public class ProfileController {
-	@Autowired
-	private ProfileComponent profiles;
+	private final ProfileComponent profiles;
+
+	public ProfileController(final ProfileComponent profiles) {
+		super();
+		this.profiles = profiles;
+	}
 
 	@GetMapping("/get")
 	public Profile getProfile(final Principal principal) {

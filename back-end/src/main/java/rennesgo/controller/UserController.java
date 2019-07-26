@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,14 +23,18 @@ import rennesgo.data.ProfileComponent;
 @RestController
 @RequestMapping("go/user")
 public class UserController {
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private UserDetailsManager userDetailsManager;
+	private final UserDetailsManager userDetailsManager;
 
-	@Autowired
-	private ProfileComponent profiles;
+	private final ProfileComponent profiles;
+
+	public UserController(final PasswordEncoder passwordEncoder, final UserDetailsManager userDetailsManager, final ProfileComponent profiles) {
+		super();
+		this.passwordEncoder = passwordEncoder;
+		this.userDetailsManager = userDetailsManager;
+		this.profiles = profiles;
+	}
 
 	@PostMapping("/new/{login}/{pwd}")
 	public Profile newAccount(@PathVariable final String login, @PathVariable final String pwd) {
