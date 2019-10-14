@@ -16,6 +16,7 @@ public class Profile {
 		prefLines = new HashSet<>();
 	}
 
+
 	public void addPrefLine(final String line) {
 		prefLines.add(line);
 	}
