@@ -1,7 +1,7 @@
 
 ## DevOps class at INSA Rennes, CS dep
 
-A time is composed of three students.
+A team is composed of three students.
 Each team has to:
  - select a research paper to read and present;
  - build a devops toolchain for the app RennesGo
@@ -93,7 +93,7 @@ Some tools: watchtower, https://github.com/pyouroboros/ouroboros, https://docs.d
 **operate**
 
 Optional: 
-- Chaos engineering. how to be resilient to failures?
+- Chaos engineering: how to be resilient to failures?
 - A/B testing
 
 
@@ -102,7 +102,7 @@ Optional:
 Optional: 
 - log useful data
 - use data mining techniques to extract information from logs
-- monitor and analysis crashes
+- monitor crashes and provide feedback to developers
 
 Some tools: logstash, eliasticsearch, kibana
 
