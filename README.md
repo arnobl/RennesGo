@@ -86,7 +86,7 @@ Mandatory:
 
 Challenges:
 - continuous service: how not to lose context? This may require to modify the back.
-
+- shadow deployment: https://stackoverflow.com/questions/14599016/shadow-deployment-for-test-in-production
 
 Some tools: watchtower, https://github.com/pyouroboros/ouroboros, https://docs.docker.com/engine/swarm/, https://www.portainer.io/, https://docs.docker.com/compose/
 
